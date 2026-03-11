@@ -4,10 +4,10 @@ const authorization = require("../Middlewares/Authenticaiton");
 
 router.get("/", async (req, res) => {
   try {
-    const items = await Pillow.find({})
+    const items = await Pillow.find({ quantity: { $gt: 0 } }) 
       .sort({ createdAt: -1 })
       .populate("material", "name")
-      .populate("item", "name");   
+      .populate("item", "name");
 
     res.json(items);
   } catch (err) {
