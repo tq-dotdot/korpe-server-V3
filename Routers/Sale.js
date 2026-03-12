@@ -46,9 +46,9 @@ router.post('/', authorization, async (req, res) => {
           await decrement(
             Material,
             order.pillow.material?._id,
-            order.pillow.weight,
+            order.pillow.weight * order.quantity,
           );
-          await decrement(Item, order.pillow.item?._id, order.pillow.length);
+          await decrement(Item, order.pillow.item?._id, order.pillow.length * order.quantity);
           // await decrement(Case, order.pillow.case?._id, order.pillow.quantity);
           await decrement(Pillow, order.pillow._id, order.quantity);
         }
